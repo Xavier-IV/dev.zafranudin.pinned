@@ -1,6 +1,6 @@
 {
   "name": "pinned.dev",
-  "version": "0.0.1-dev",
+  "version": "0.0.2-dev",
   "main": "src/main.js",
   "scripts": {
     "start": "electron src/main.js",
