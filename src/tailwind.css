@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-transparent m-0 flex items-center justify-center overflow-hidden;
+}
+
+#error {
+  @apply hidden text-red-500 text-center mt-10;
+}
+
+#app-container {
+  @apply flex flex-col w-screen h-screen rounded-2xl shadow-lg overflow-hidden;
+  -webkit-app-region: drag;
+}
+
+iframe {
+  @apply w-full h-full border rounded-lg overflow-hidden;
+}

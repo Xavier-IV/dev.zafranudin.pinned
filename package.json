@@ -1,0 +1,31 @@
+{
+  "name": "pinned.dev",
+  "version": "0.0.1-dev",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron src/main.js",
+    "build": "rimraf dist && electron-builder",
+    "dev": "npx concurrently \"npm run watch:css\" \"npx nodemon\"",
+    "build:css": "npx tailwindcss -i ./src/tailwind.css -o ./src/output.css",
+    "watch:css": "npx tailwindcss -i ./src/tailwind.css -o ./src/output.css --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "electron": "^33.0.2",
+    "electron-builder": "^25.1.8",
+    "nodemon": "^3.1.7",
+    "tailwindcss": "^3.4.14",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47"
+  },
+  "dependencies": {},
+  "build": {
+    "appId": "dev.zafranudin.pinneddev",
+    "productName": "Pinned",
+    "copyright": "© 2024 zafranudin.dev"
+  }
+}
