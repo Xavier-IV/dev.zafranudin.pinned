@@ -31,8 +31,11 @@ function createWindow() {
     height: 230,
     transparent: true,
     alwaysOnTop: true,
-    // resizable: false, // Disable resizing
-
+    hasShadow: false,
+    frame: false,
+    // focusable: false,
+    // resizable: true, // Disable resizing
+    resizable: true,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       contextIsolation: true, // Secure context isolation
@@ -99,6 +102,35 @@ app.whenReady().then(() => {
 // Handle close event from renderer
 ipcMain.on("app-close", () => {
   app.quit();
+});
+
+// Toggle between large and small window sizes
+ipcMain.on("toggle-size", () => {
+  const { width, height } = mainWindow.getBounds();
+  const primaryDisplay = screen.getPrimaryDisplay();
+  const { width: primaryWidth } = primaryDisplay.workAreaSize;
+
+  if (width === 300 && height === 230) {
+    mainWindow.setBounds({
+      width: 300 * 2,
+      height: 230 * 2,
+    });
+    mainWindow.setBounds({
+      x: primaryWidth - 610,
+      y: 50,
+    });
+    mainWindow.webContents.send("set-zoom", 0.5); // Set zoom factor to 1.0 for large size
+  } else {
+    mainWindow.setBounds({
+      width: 300,
+      height: 230,
+    });
+    mainWindow.setBounds({
+      x: primaryWidth - 320,
+      y: 50,
+    });
+    mainWindow.webContents.send("set-zoom", 0.3);
+  }
 });
 
 app.on("window-all-closed", () => {

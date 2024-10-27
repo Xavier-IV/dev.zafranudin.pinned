@@ -11,6 +11,33 @@
     class="bg-transparent w-screen h-screen max-w-screen max-h-screen m-0 flex items-center justify-center overflow-hidden p-10"
   >
     <div id="app-container" style="-webkit-app-region: drag">
+      <!-- Hover overlay with buttons -->
+      <div class="flex justify-between items-center">
+        <button id="drag-button" class="control-normal">Drag Me</button>
+
+        <div class="flex m-4 items-center justify-end gap-2">
+          <button
+            id="toggle-button"
+            class="control-normal bg-black hover:bg-gray-600 text-white px-5 py-1 rounded-full transition duration-200"
+          >
+            Expand
+          </button>
+
+          <button
+            id="url-button"
+            class="control-normal bg-black hover:bg-gray-600 text-white px-5 py-1 rounded-full transition duration-200"
+          >
+            Open URL
+          </button>
+          <button
+            id="close-button"
+            class="control-normal bg-black hover:bg-gray-600 text-white px-5 py-1 rounded-full transition duration-200 cursor-pointer"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+
       <div
         class="aspect-w-16 aspect-h-9 border-none w-full h-full rounded-3xl overflow-hidden bg-red-200"
       >
@@ -21,22 +48,6 @@
         ></iframe>
       </div>
 
-      <!-- Hover overlay with buttons -->
-      <div class="flex m-4 items-center justify-end gap-2">
-        <button
-          id="url-button"
-          class="text-[40px] bg-black hover:bg-gray-600 text-white px-5 py-1 rounded-full transition duration-200"
-        >
-          Open URL
-        </button>
-        <button
-          id="close-button"
-          class="text-[40px] bg-black hover:bg-gray-600 text-white px-5 py-1 rounded-full transition duration-200 cursor-pointer"
-        >
-          Close
-        </button>
-      </div>
-
       <div id="error" class="hidden text-red-500 text-center mt-10">
         Failed to load page. Please check the URL.
       </div>
@@ -44,9 +55,9 @@
       <!-- Custom URL Input Dialog -->
       <div
         id="url-modal"
-        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden scale-[200%]"
+        class="fixed inset-0 items-center justify-center hidden scale-[200%]"
       >
-        <div class="bg-white p-6 rounded-lg shadow-lg">
+        <div class="bg-white p-6 rounded-lg">
           <input
             id="url-input"
             type="text"
@@ -75,10 +86,16 @@
       // Show URL input dialog
       document.getElementById("url-button").addEventListener("click", () => {
         document.getElementById("url-modal").classList.remove("hidden");
+        document.getElementById("url-modal").classList.add("flex");
       });
       // Close the modal on cancel
       document.getElementById("cancel-button").addEventListener("click", () => {
         document.getElementById("url-modal").classList.add("hidden");
+        document.getElementById("url-modal").classList.remove("flex");
+      });
+
+      document.getElementById("toggle-button").addEventListener("click", () => {
+        window.electronAPI.toggleSize(); // Use electronAPI from preload
       });
 
       // Event listener for the close button
