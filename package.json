@@ -1,10 +1,11 @@
 {
-  "name": "pinned.dev",
-  "version": "0.0.2-dev",
+  "name": "pinned",
+  "version": "0.0.3-dev",
   "main": "src/main.js",
   "scripts": {
     "start": "electron src/main.js",
     "build": "rimraf dist && electron-builder",
+    "build:dmg": "npx create-dmg ./dist/pinned-darwin-x64/pinned.app ./dist/pinned-darwin-x64",
     "dev": "npx concurrently \"npm run watch:css\" \"npx nodemon\"",
     "build:css": "npx tailwindcss -i ./src/tailwind.css -o ./src/output.css",
     "watch:css": "npx tailwindcss -i ./src/tailwind.css -o ./src/output.css --watch",
@@ -15,17 +16,29 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@electron/packager": "^18.3.5",
+    "autoprefixer": "^10.4.20",
+    "bestzip": "^2.2.1",
+    "create-dmg": "^7.0.0",
     "electron": "^33.0.2",
     "electron-builder": "^25.1.8",
+    "electron-installer-dmg": "^5.0.1",
     "nodemon": "^3.1.7",
-    "tailwindcss": "^3.4.14",
-    "autoprefixer": "^10.4.20",
-    "postcss": "^8.4.47"
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.14"
   },
-  "dependencies": {},
   "build": {
     "appId": "dev.zafranudin.pinneddev",
     "productName": "Pinned",
-    "copyright": "© 2024 zafranudin.dev"
+    "copyright": "© 2024 zafranudin.dev",
+    "mac": {
+      "target": "dmg",
+      "icon": "src/assets/logo.png",
+      "category": "public.app-category.utilities",
+      "entitlements": "entitlements.mac.plist",
+      "entitlementsInherit": "entitlements.mac.plist",
+      "hardenedRuntime": true,
+      "identity": "Mohamad Zafranudin Mohamed Zafrin (U7H6D6UM68)"
+    }
   }
 }

@@ -36,6 +36,8 @@ function createWindow() {
     // focusable: false,
     // resizable: true, // Disable resizing
     resizable: true,
+    icon: path.join(__dirname, "assets/logo.png"),
+
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       contextIsolation: true, // Secure context isolation
@@ -48,7 +50,7 @@ function createWindow() {
 
   // Handle the iframe URL update event from preload.js
   ipcMain.on("set-iframe-url", (event, url) => {
-    win.webContents.send("update-iframe-url", url);
+    mainWindow.webContents.send("update-iframe-url", url);
   });
 
   mainWindow.loadFile(path.join(__dirname, "index.html"));
@@ -79,7 +81,7 @@ function createTray() {
     },
   ]);
 
-  tray.setToolTip("Pinned.dev"); // Tooltip on hover
+  tray.setToolTip("Pinned"); // Tooltip on hover
   tray.setContextMenu(contextMenu);
 
   // Optional: toggle the window on click
