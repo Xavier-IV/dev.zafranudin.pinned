@@ -4,7 +4,7 @@
   "main": "src/main.js",
   "scripts": {
     "start": "electron src/main.js",
-    "build": "rimraf dist && electron-builder",
+    "build": "rimraf dist && node ./packager.js",
     "build:dmg": "npx create-dmg ./dist/pinned-darwin-x64/pinned.app ./dist/pinned-darwin-x64",
     "dev": "npx concurrently \"npm run watch:css\" \"npx nodemon\"",
     "build:css": "npx tailwindcss -i ./src/tailwind.css -o ./src/output.css",

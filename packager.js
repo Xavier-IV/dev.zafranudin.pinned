@@ -8,6 +8,7 @@ async function packageApp() {
       platform: "darwin",
       arch: "x64",
       osxSign: {}, // Signing options (empty object if you already signed elsewhere)
+      icon: "./src/assets/logo.png",
       osxNotarize: {
         teamId: process.env.APPLE_TEAM_ID,
         appleId: process.env.APPLE_ID,
